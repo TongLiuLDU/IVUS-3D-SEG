@@ -1,5 +1,5 @@
 nnunetData/
-IVUS-3D-SEG/nnUNet/nnunetv2/training/nnUNetTrainer/
+nnUNet/nnunetv2/training/nnUNetTrainer/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
