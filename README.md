@@ -79,8 +79,8 @@ nnunetData/
 
 If you want to start training quickly, you can download our preprocessed data directly:
 
-- **nnUNet_raw**: [Download Link](https://drive.google.com/file/d/1vpoVBetn6P8jIRzMpe3HPEWAACbA_dhv/view?usp=drive_link)
-- **nnUNet_preprocessed**: [Download Link](https://drive.google.com/file/d/1qQrl2_i9AgZPB8Zl0YK18TzKz1buQxLh/view?usp=drive_link)
+- **nnUNet_raw**: [Download Link](https://drive.google.com/file/d/view?usp=drive_link)
+- **nnUNet_preprocessed**: [Download Link](https://drive.google.com/file/d/view?usp=drive_link)
 
 #### Option 2: Process from Raw Data
 
@@ -88,7 +88,7 @@ If you want to process from raw data, please follow these steps:
 
 **Step 1: Download Raw Dataset**
 
-Download the IVUS-3D-SEG dataset from [Google Drive](https://drive.google.com/file/d/1VZJ_5eK1a53ddEsfZ-UStWdfamFkfy4G/view?usp=drive_link) and extract it to the `nnunetData/` directory.
+Download the IVUS-3D-SEG dataset from [Google Drive](https://drive.google.com/file/d/view?usp=drive_link) and extract it to the `nnunetData/` directory.
 
 > 📊 **Dataset Note**: The dataset contains 75 sequences. Two discontinuous sequences in the raw data have been split at the breakpoints to ensure data continuity.
 

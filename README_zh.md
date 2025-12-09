@@ -78,8 +78,8 @@ nnunetData/
 
 如果你希望快速开始训练，可以直接下载我们预处理好的数据：
 
-- **nnUNet_raw**: [下载链接](https://drive.google.com/file/d/1vpoVBetn6P8jIRzMpe3HPEWAACbA_dhv/view?usp=drive_link)
-- **nnUNet_preprocessed**: [下载链接](https://drive.google.com/file/d/1qQrl2_i9AgZPB8Zl0YK18TzKz1buQxLh/view?usp=drive_link)
+- **nnUNet_raw**: [下载链接](https://drive.google.com/file/d/view?usp=drive_link)
+- **nnUNet_preprocessed**: [下载链接](https://drive.google.com/file/d/view?usp=drive_link)
 
 #### 选项 2: 从原始数据处理
 
@@ -87,7 +87,7 @@ nnunetData/
 
 **步骤 1: 下载原始数据集**
 
-从 [Google Drive](https://drive.google.com/file/d/1VZJ_5eK1a53ddEsfZ-UStWdfamFkfy4G/view?usp=drive_link) 下载 IVUS-3D-SEG 数据集，并解压到 `nnunetData/` 目录下。
+从 [Google Drive](https://drive.google.com/file/d/view?usp=drive_link) 下载 IVUS-3D-SEG 数据集，并解压到 `nnunetData/` 目录下。
 
 > 📊 **数据集说明**: 该数据集包含 75 条序列。原始数据中有两条不连续序列已在断点处分割，以保证数据连续性。
 
