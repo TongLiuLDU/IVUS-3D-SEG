@@ -279,9 +279,9 @@ if __name__ == '__main__':
         in_channels=1,
         out_channels=3,
         input_size=[192, 128, 128],
-        window_sizes=[[3, 3, 3], [17, 3, 3], [21, 3, 3], None],  # 适应新分辨率的窗口大小
+        window_sizes=[[3, 3, 3], [19, 3, 3], [21, 3, 3], None],  # 适应新分辨率的窗口大小
         dims=[32, 64, 128, 256],
-        depths=[3, 3, 5, 2],
+        depths=[2, 3, 5, 2],
         num_heads=[4, 4, 8, 8],
         mlp_ratios=[4, 4, 4, 4],
         do_ds=False,
