@@ -5,101 +5,101 @@
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.6.0-red.svg)](https://pytorch.org/)
 
-## 📖 简介
+[中文版本](README_zh.md)
 
-本项目提供了一个用于 3D 血管内超声（IVUS）图像分割的完整解决方案，包括：
-- **IVUS-3D-SEG 数据集**：包含 75 条 3D IVUS 序列，标注了外弹力膜（EEM）和管腔（Lumen）
-- **SlidingStripFormer 模型**：基于 nnUNet 框架的创新分割架构
+## 📖 Introduction
 
-### 🏷️ 标注说明
+This project provides a complete solution for 3D Intravascular Ultrasound (IVUS) image segmentation, including:
+- **IVUS-3D-SEG Dataset**: Contains 75 3D IVUS sequences with annotations for External Elastic Membrane (EEM) and Lumen
+- **SlidingStripFormer Model**: An innovative segmentation architecture based on the nnUNet framework
 
-数据集包含以下标注类别：
-- **背景 (Background)**: 标签 0
-- **外弹力膜 (EEM)**: 标签 1
-- **管腔 (Lumen)**: 标签 2
+> ⚠️ **Data Availability Notice**: The dataset will be made publicly available after paper acceptance.
 
----
+### 🏷️ Annotation Description
 
-## 📑 目录
-
-- [1. 安装](#1-安装)
-  - [1.1 环境要求](#11-环境要求)
-  - [1.2 安装步骤](#12-安装步骤)
-- [2. 数据处理](#2data-processing)
-  - [2.1 目录结构](#-21-目录结构)
-  - [2.2 快速开始](#-22-快速开始)
-  - [2.3 数据集划分](#-23-数据集划分)
-- [3. 训练模型](#3-训练模型)
-- [4. 预测模型](#4-预测模型)
-- [5. 模型评估](#5-模型评估)
-- [6. 可视化](#6-可视化)
-- [引用](#-引用)
-- [许可证](#-许可证)
+The dataset contains the following annotation categories:
+- **Background**: Label 0
+- **External Elastic Membrane (EEM)**: Label 1
+- **Lumen**: Label 2
 
 ---
 
-## 1. 安装
+## 📑 Table of Contents
 
-### 1.1 环境要求
+- [1. Installation](#1-installation)
+  - [1.1 Requirements](#11-requirements)
+  - [1.2 Installation Steps](#12-installation-steps)
+- [2. Data Processing](#2-data-processing)
+  - [2.1 Directory Structure](#-21-directory-structure)
+  - [2.2 Quick Start](#-22-quick-start)
+  - [2.3 Dataset Split](#-23-dataset-split)
+- [3. Model Training](#3-model-training)
+- [4. Model Prediction](#4-model-prediction)
+- [5. Model Evaluation](#5-model-evaluation)
+- [6. Visualization](#6-visualization)
+
+---
+
+## 1. Installation
+
+### 1.1 Requirements
 
 - Python 3.10+
 - CUDA 11.8+
 - PyTorch 2.6.0+
 
-### 1.2 安装步骤
+### 1.2 Installation Steps
 
 ```shell
 conda create -n nnunet python=3.10
 pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu118
 
-# nnUnet的安装
+# nnUnet Installation
 cd nnUNet
 pip install -e .            
 ```
 
+## 2. Data Processing
 
-## 2.Data Processing
+### 📁 2.1 Directory Structure
 
-### 📁 2.1 目录结构
-
-项目采用 nnUNet 标准目录组织形式：
+The project follows the nnUNet standard directory organization:
 
 ```
 nnunetData/
-├── nnUNet_raw/              # 原始数据
-├── nnUNet_preprocessed/     # 预处理后的数据
-├── nnUNet_results/          # 训练结果
-└── IVUS-3D-SEG/            # 原始 IVUS 数据集
+├── nnUNet_raw/              # Raw data
+├── nnUNet_preprocessed/     # Preprocessed data
+├── nnUNet_results/          # Training results
+└── IVUS-3D-SEG/            # Original IVUS dataset
 ```
 
-### 🚀 2.2 快速开始
+### 🚀 2.2 Quick Start
 
-#### 选项 1: 使用预处理好的数据
+#### Option 1: Use Preprocessed Data
 
-如果你希望快速开始训练，可以直接下载我们预处理好的数据：
+If you want to start training quickly, you can download our preprocessed data directly:
 
-- **nnUNet_raw**: [下载链接](https://drive.google.com/file/d/1vpoVBetn6P8jIRzMpe3HPEWAACbA_dhv/view?usp=drive_link)
-- **nnUNet_preprocessed**: [下载链接](https://drive.google.com/file/d/1qQrl2_i9AgZPB8Zl0YK18TzKz1buQxLh/view?usp=drive_link)
+- **nnUNet_raw**: [Download Link](https://drive.google.com/file/d/1vpoVBetn6P8jIRzMpe3HPEWAACbA_dhv/view?usp=drive_link)
+- **nnUNet_preprocessed**: [Download Link](https://drive.google.com/file/d/1qQrl2_i9AgZPB8Zl0YK18TzKz1buQxLh/view?usp=drive_link)
 
-#### 选项 2: 从原始数据处理
+#### Option 2: Process from Raw Data
 
-如果你想从原始数据开始处理，请按照以下步骤操作：
+If you want to process from raw data, please follow these steps:
 
-**步骤 1: 下载原始数据集**
+**Step 1: Download Raw Dataset**
 
-从 [Google Drive](https://drive.google.com/file/d/1VZJ_5eK1a53ddEsfZ-UStWdfamFkfy4G/view?usp=drive_link) 下载 IVUS-3D-SEG 数据集，并解压到 `nnunetData/` 目录下。
+Download the IVUS-3D-SEG dataset from [Google Drive](https://drive.google.com/file/d/1VZJ_5eK1a53ddEsfZ-UStWdfamFkfy4G/view?usp=drive_link) and extract it to the `nnunetData/` directory.
 
-> 📊 **数据集说明**: 该数据集包含 75 条序列。原始数据中有两条不连续序列已在断点处分割，以保证数据连续性。
+> 📊 **Dataset Note**: The dataset contains 75 sequences. Two discontinuous sequences in the raw data have been split at the breakpoints to ensure data continuity.
 
-**步骤 2: 创建必要的目录**
+**Step 2: Create Necessary Directories**
 
 ```bash
 cd nnunetData
 mkdir -p nnUNet_raw nnUNet_preprocessed nnUNet_results
 ```
 
-
-你需要设置 nnUNet 的环境变量，告诉 nnUNet 数据存储的位置：
+You need to set nnUNet environment variables to tell nnUNet where to store data:
 
 ```bash
 export nnUNet_raw="/path/to/your/nnunetData/nnUNet_raw"
@@ -107,75 +107,59 @@ export nnUNet_preprocessed="/path/to/your/nnunetData/nnUNet_preprocessed"
 export nnUNet_results="/path/to/your/nnunetData/nnUNet_results"
 ```
 
-> 💡 **提示**: 将上述路径替换为你实际的绝对路径。建议将这些环境变量添加到 `~/.bashrc` 或 `~/.zshrc` 中，以便永久生效。
+> 💡 **Tip**: Replace the above paths with your actual absolute paths. It is recommended to add these environment variables to `~/.bashrc` or `~/.zshrc` for permanent effect.
 
-**步骤 3: 转换为 nnUNet 格式**
+**Step 3: Convert to nnUNet Format**
 
-运行数据转换脚本，将原始数据组织为 nnUNet 标准格式：
+Run the data conversion script to organize raw data into nnUNet standard format:
 
 ```bash
 python DataProcess/convert_to_nnunet_use.py
 ```
 
-该脚本会自动：
-- 根据预定义的训练/验证/测试集划分复制文件
-- 重命名文件为 nnUNet 标准命名格式
-- 生成数据复制报告（`copy_report.txt`）
+This script will automatically:
+- Copy files according to the predefined train/val/test split
+- Rename files to nnUNet standard naming format
+- Generate a data copy report (`copy_report.txt`)
 
-**步骤 4: 生成数据集配置文件**
+**Step 4: Generate Dataset Configuration File**
 
-运行以下脚本生成 `dataset.json`：
+Run the following script to generate `dataset.json`:
 
 ```bash
 python nnUNet/nnunetv2/dataset_conversion/Dataset789_ultrasound.py
 ```
 
-**步骤 5: 数据预处理**
+**Step 5: Data Preprocessing**
 
-使用 nnUNet 内置命令进行数据预处理：
+Use nnUNet built-in command for data preprocessing:
 
 ```bash
 nnUNetv2_plan_and_preprocess -d 789 -c 3d_lowres 3d_fullres -np 16
 ```
 
-参数说明：
-- `-d 789`: 数据集 ID
-- `-c 3d_lowres 3d_fullres`: 同时处理低分辨率和全分辨率配置
-- `-np 16`: 使用 16 个进程并行处理
+### 📝 2.3 Dataset Split
 
-### 📝 2.3 数据集划分
+Dataset split information is stored in the `DataProcess/split_result/` directory:
+- `train_cases.txt`: List of training cases
+- `val_cases.txt`: List of validation cases
+- `test_cases.txt`: List of test cases
 
-数据集划分信息存储在 `DataProcess/split_result/` 目录中：
-- `train_cases.txt`: 训练集样本列表
-- `val_cases.txt`: 验证集样本列表  
-- `test_cases.txt`: 测试集样本列表
+## 3. Model Training
 
-
-
-
-## 3. 训练模型
-
-使用 SlidingStripFormer 训练器进行模型训练：
+Train the model using the SlidingStripFormer trainer:
 
 ```bash
 nnUNetv2_train 789 3d_lowres 0 -tr nnUNetTrainer_StripFormer
 ```
 
-**参数说明**：
-- `789`: 数据集 ID
-- `3d_lowres`: 使用 3D 低分辨率配置
-- `0`: Fold 编号（用于交叉验证）
-- `-tr nnUNetTrainer_StripFormer`: 使用自定义的 StripFormer 训练器
-
-> 💡 **提示**: 训练过程将自动保存 checkpoint 到 `nnUNet_results/Dataset789_ultrasound/nnUNetTrainer_StripFormer__nnUNetPlans__3d_lowres/fold_0/`
-
-
+> 💡 **Tip**: The training process will automatically save checkpoints to `nnUNet_results/Dataset789_ultrasound/nnUNetTrainer_StripFormer__nnUNetPlans__3d_lowres/fold_0/`
 
 ---
 
-## 4. 预测模型
+## 4. Model Prediction
 
-使用训练好的模型对测试集进行预测：
+Predict on the test set using the trained model:
 
 ```bash
 nnUNetv2_predict -i nnunetData/nnUNet_raw/Dataset789_ultrasound/imagesTs \
@@ -187,22 +171,13 @@ nnUNetv2_predict -i nnunetData/nnUNet_raw/Dataset789_ultrasound/imagesTs \
                  -tr nnUNetTrainer_StripFormer
 ```
 
-**参数说明**：
-- `-i`: 输入图像目录（测试集）
-- `-o`: 输出预测结果目录
-- `-d 789`: 数据集 ID
-- `-c 3d_lowres`: 使用的配置
-- `-f 0`: 使用的 fold
-- `-chk checkpoint_best.pth`: 使用最佳 checkpoint
-- `-tr`: 指定训练器类型
-
-预测结果将保存为 NIfTI 格式（`.nii.gz`）文件。
+Prediction results will be saved in NIfTI format (`.nii.gz`).
 
 ---
 
-## 5. 模型评估
+## 5. Model Evaluation
 
-运行评估脚本计算各项性能指标：
+Run the evaluation script to calculate performance metrics:
 
 ```bash
 python evaluation/evaluation.py \
@@ -211,55 +186,24 @@ python evaluation/evaluation.py \
        --output_dir evaluation/results
 ```
 
-### 5.1 评估指标
+### 5.1 Evaluation Metrics
 
-该脚本会计算以下指标：
-- **Dice 系数**: 衡量分割重叠度
-- **Hausdorff 距离 (HD)**: 衡量边界距离
-- **百分比面积差 (PAD)**: 衡量面积差异
-- **交并比 (IoU)**: 衡量区域重叠
+This script will calculate the following metrics:
+- **Dice Coefficient**: Measures segmentation overlap
+- **Hausdorff Distance (HD)**: Measures boundary distance
+- **Percentage Area Difference (PAD)**: Measures area difference
+- **Intersection over Union (IoU)**: Measures region overlap
 
-评估结果将保存为 JSON 文件，包含每个样本的详细指标和平均性能。
-
----
-
-## 6. 可视化
-
-运行可视化脚本生成分割结果的可视化图像：
-
-运行`visual/visual_all.py`以生成可视化结果。
-
-
-
-## 📄 引用
-
-如果本项目对您的研究有帮助，请引用我们的论文：
-
-```bibtex
-@article{your_paper_2025,
-  title={IVUS-3D-SEG: A Dataset and Method for 3D IVUS Image Segmentation},
-  author={Your Name and Others},
-  journal={Journal Name},
-  year={2025}
-}
-```
+Evaluation results will be saved as a JSON file, containing detailed metrics for each sample and average performance.
 
 ---
 
-## 📝 许可证
+## 6. Visualization
 
-本项目基于 MIT 许可证开源。详见 [LICENSE](LICENSE) 文件。
+Run the visualization script to generate visualized images of segmentation results:
 
----
+Run `visual/visual_all.py` to generate visualization results.
 
-## 🙏 致谢
+## 🙏 Acknowledgements
 
-本项目基于 [nnU-Net](https://github.com/MIC-DKFZ/nnUNet) 框架开发，感谢原作者的贡献。
-
----
-
-## 📧 联系方式
-
-如有问题或建议，欢迎通过以下方式联系：
-- 提交 [Issue](../../issues)
-- 发送邮件: [your-email@example.com]
+This project is based on [nnU-Net](https://github.com/MIC-DKFZ/nnUNet) framework. Thanks to the original authors for their contribution.
